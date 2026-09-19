@@ -1,0 +1,58 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Track a train â€” RailSync</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/passenger.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body data-view="passenger">
+    <section class="hero" style="padding:55px 0 75px">
+        <div class="hero-inner"><span class="eyebrow" style="color:#8eb8ff">PASSENGER ETA INTELLIGENCE</span>
+            <h1 style="font-size:48px">Catch your train</h1>
+            <p>Get a forecast for every upcoming station, powered by simulated live running conditions.</p>
+        </div>
+    </section>
+    <main class="container search-panel">
+        <section class="card">
+            <div class="search-tabs"><span>Track by train</span><span class="muted">Search a route</span></div>
+            <form class="search-layout" onsubmit="return trackSearch(this)">
+    <label class="field">
+        Train Number / Train Name
+        <input
+            placeholder="Enter train number or name"
+            aria-label="Train number or train name"
+            required
+        >
+    </label>
+
+    <button class="btn">Track Train</button>
+</form>
+        </section>
+        <section style="margin-top:28px">
+            <div class="heading">
+                <div><span class="eyebrow">MATCHING TRAINS</span>
+                    <h2 style="margin:4px 0">Live ETA search results</h2>
+                </div>
+            </div>
+            <div id="results" class="grid"></div>
+        </section>
+        <section class="grid three" style="margin-top:27px"><a class="card quick" href="train.html"><i
+                    class="fa-solid fa-location-dot"></i><b>Track My Train</b><span class="muted">See every next
+                    stop</span></a><a class="card quick" href="train.html"><i
+                    class="fa-solid fa-wand-magic-sparkles"></i><b>Check ETA</b><span class="muted">AI prediction &
+                    confidence</span></a><a class="card quick" href="schedule.html"><i
+                    class="fa-solid fa-calendar-days"></i><b>Train Calendar</b><span class="muted">Timetable & running
+                    days</span></a></section>
+    </main>
+    <script src="js/mockData.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/auth.js?v=2"></script>
+    <script src="js/passenger.js"></script>
+</body>
+
+</html>

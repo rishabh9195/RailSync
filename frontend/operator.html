@@ -1,0 +1,129 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Operator Dashboard â€” RailSync</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/operator.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body data-view="operator">
+    <main class="container">
+        <div class="heading operator-hero">
+            <div><span class="eyebrow">CONTROL ROOM Â· DEMO MODE</span>
+                <h1>Network overview</h1>
+                <p>Operational intelligence for dynamic ETA forecasts and downstream impact management.</p>
+            </div>
+            <div><button class="btn small secondary" onclick="return operatorLogout()">Exit Operator</button></div>
+        </div>
+        <div class="grid stat-grid">
+            <div class="card stat"><span class="label">ACTIVE TRAINS</span><strong id="activeTrains">6</strong><span
+                    class="delta">On monitored corridors</span></div>
+            <div class="card stat"><span class="label">DELAYED</span><strong id="delayedTrains">6</strong><span
+                    class="delta" style="color:#ad7000" id="delayedNote">5 need attention</span></div>
+            <div class="card stat"><span class="label">HIGH RISK</span><strong id="highRisk">1</strong><span
+                    class="delta" style="color:#c33d50">Forecast threshold exceeded</span></div>
+            <div class="card stat"><span class="label">ACTIVE EVENTS</span><strong id="eventCount">2</strong><span
+                    class="delta">Live demo conditions</span></div>
+        </div>
+        <div class="grid two" style="margin-top:20px">
+            <section class="card" id="network">
+                <div class="heading">
+                    <h2 class="section-title">Live railway network</h2><a class="btn small" href="events.html">+ Add
+                        operational event</a>
+                </div>
+                <div id="operatorMap" class="map"></div>
+            </section>
+            <aside class="card">
+                <h2 class="section-title">Active operational events</h2>
+                <div id="eventList"></div><a href="events.html" class="btn small secondary"
+                    style="margin-top:12px">Manage all events</a>
+            </aside>
+        </div>
+        <section class="card" id="trains" style="margin-top:20px">
+            <div class="heading">
+                <div><span class="eyebrow">LIVE TRAINS</span>
+                    <h2 class="section-title" style="margin:4px 0">Prediction monitoring</h2>
+                </div><a class="btn small secondary" href="simulation.html">Open simulation center</a>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>TRAIN</th>
+                            <th>LOCATION</th>
+                            <th>SPEED</th>
+                            <th>DELAY</th>
+                            <th>PREDICTED DELAY</th>
+                            <th>RISK</th>
+                            <th>STATUS</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="trainTable"></tbody>
+                </table>
+            </div>
+        </section>
+        <section class="card" id="ops" style="margin-top:20px">
+            <div class="heading">
+                <div><span class="eyebrow">ML OPERATIONAL INPUT</span>
+                    <h2 class="section-title" style="margin:4px 0">Operator prediction input</h2>
+                    <p class="muted">Delay and congestion entered here are stored in FastAPI and applied to the trained
+                        ML model on the next prediction.</p>
+                </div><button class="btn small secondary" onclick="return clearOpsTrain()">Clear train
+                    overrides</button>
+            </div>
+            <form onsubmit="submitOpsForm(this); return false;">
+                <div class="grid two"><label class="field">Train<select id="opsTrain"></select></label><label
+                        class="field">Section (current â†’ next)<select id="opsSection"></select></label><label
+                        class="field">Operational delay (minutes)<input id="opsDelay" type="number" min="-10" max="120"
+                            step="0.5" value="0" required></label><label class="field">Congestion<select
+                            id="opsCongestion">
+                            <option value="Low">Low</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="High">High</option>
+                        </select></label><label class="field">Event type<select id="opsEvent">
+                            <option value="">None</option>
+                            <option>Track Congestion</option>
+                            <option>Signal Failure</option>
+                            <option>Heavy Congestion</option>
+                            <option>Speed Restriction</option>
+                            <option>Heavy Rain</option>
+                            <option>Platform Congestion</option>
+                            <option>Track Obstruction</option>
+                            <option>Other Operational Issue</option>
+                        </select></label><label class="field">Operator note<input id="opsNote"
+                            placeholder="Optional note for passengers" maxlength="140"></label></div>
+                <div style="margin-top:14px"><button class="btn" type="submit">Save operational input</button></div>
+            </form>
+            <p class="muted" id="opsContext" style="margin:12px 0 0; font-size:12px"></p>
+            <div class="table-wrap" style="margin-top:16px">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SECTION</th>
+                            <th>DELAY</th>
+                            <th>CONGESTION</th>
+                            <th>PREDICTED (ML)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="opsState"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script src="js/mockData.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/auth.js?v=2"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/operator.js"></script>
+    <script src="js/operations.js"></script>
+</body>
+
+</html>

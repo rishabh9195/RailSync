@@ -1,0 +1,47 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Events â€” RailSync</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/operator.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body data-view="operator">
+    <main class="container">
+        <div class="heading">
+            <div><span class="eyebrow">CONTROL ROOM</span>
+                <h1>Operational events</h1>
+                <p>Record exceptional operating conditions and immediately recalculate affected ETA forecasts.</p>
+            </div><button id="add" class="btn">+ Add Operational Event</button>
+        </div>
+        <section class="card">
+            <h2 class="section-title">ACTIVE EVENTS</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>LOCATION</th>
+                            <th>EVENT</th>
+                            <th>SEVERITY</th>
+                            <th>DURATION</th>
+                            <th>AFFECTED TRAINS</th>
+                            <th>STATUS</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="eventsTable"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script src="js/mockData.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/auth.js?v=2"></script>
+    <script src="js/events.js"></script>
+</body>
+
+</html>

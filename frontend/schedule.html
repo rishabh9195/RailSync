@@ -1,0 +1,87 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Train Calendar â€” RailSync</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/passenger.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body data-view="passenger">
+    <main class="container">
+        <div class="heading">
+            <div>
+                <span class="eyebrow">TIMETABLE</span>
+                <h1>Train Calendar</h1>
+                <p>Search a train, pick a date, and view its scheduled timetable with running days.</p>
+            </div>
+        </div>
+
+        <section class="card">
+            <form class="search-layout" onsubmit="return findTrainForm(this)">
+                <label class="field">
+                    Train Number / Train Name
+                    <input
+                        id="trainQuery"
+                        placeholder="e.g. 12723"
+                        aria-label="Train number or train name"
+                        autocomplete="off"
+                    >
+                </label>
+
+                <label class="field">
+                    Travel Date
+                    <input
+                        id="travelDate"
+                        type="date"
+                        aria-label="Travel date"
+                    >
+                </label>
+
+                <button class="btn" type="submit">Search</button>
+            </form>
+        </section>
+
+        <section class="card" style="margin-top:18px" id="trainInfoCard">
+            <div id="trainInfo"></div>
+            <div id="runStatus" style="margin-top:12px"></div>
+        </section>
+
+        <section class="card" style="margin-top:18px">
+            <h2 class="section-title">Scheduled Timetable</h2>
+            <div id="timetableWrap" class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>STATION</th>
+                            <th>ARRIVAL</th>
+                            <th>DEPARTURE</th>
+                            <th>HALT</th>
+                            <th>DISTANCE</th>
+                            <th>DAY</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timetableBody"></tbody>
+                </table>
+            </div>
+            <div id="timetableNote" style="margin-top:12px"></div>
+            <div style="margin-top:14px">
+                <button class="btn" id="trackBtn" onclick="trackTrain()">Track This Train</button>
+            </div>
+            <p class="muted" style="margin:14px 0 0; font-size:12px">
+                Timetable information is curated for this prototype. Live running status and AI-predicted ETA are provided separately.
+            </p>
+        </section>
+    </main>
+
+    <script src="js/mockData.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/auth.js?v=2"></script>
+    <script src="js/schedule.js"></script>
+</body>
+
+</html>
